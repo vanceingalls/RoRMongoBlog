@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+%html
+  %head
+    %title= 'BlogMongodb'
+
+    <!--[if lt IE 9]>
+    = javascript_include_tag 'http://html5shim.googlecode.com/svn/trunk/html5.js'
+    <![endif]-->
+
+    = stylesheet_link_tag    "application", :media => "all"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+
+    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1.0" }
+
+%body
+  .navbar.navbar-fixed-top
+    .navbar-inner
+      .container
+        %a.btn.btn-navbar{ :data => { :toggle => 'collapse', :target => '.nav-collapse' } }
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+
+        = link_to 'MongoBlog', '#', :class=>'brand'
+
+        .nav-collapse
+          %ul.nav
+            %li 
+              = link_to 'View all posts', posts_path
+            %li 
+              = link_to 'Create post', new_post_path
+            -if current_user
+              %li
+                =link_to 'Logged in as ' + current_user.email, '#'
+              %li
+                =link_to 'Log out', log_out_path
+            -else
+              %li 
+                = link_to 'Sign up', sign_up_path
+              %li 
+                = link_to 'Log in', log_in_path
+
+  .container
+
+    -flash.each do |name, msg|
+      %div{ :class => 'alert alert-block ' + ( name == :notice ? 'alert-success' : 'alert-error' ) }
+        %button.close{ :type => 'button', :data => { :dismiss => 'alert' } } ×
+        = msg
+
+    .row
+      .span9 
+        = yield
+      .span3
+        %h2
+          About Us
+        This is a blog to practice my RoR/Bootstrap foo. There is absolutely nothing to see here, save some pretty friggin awesome RoR/Bootstrap foo! As you were.

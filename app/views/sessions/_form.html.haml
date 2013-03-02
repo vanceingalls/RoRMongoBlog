@@ -1,0 +1,15 @@
+= form_tag sessions_path, :class => "form-horizontal" do
+  %fieldset
+    = label_tag :email
+    = text_field_tag :email, params[:email], :class => "input-text"
+
+    = label_tag :password
+    = password_field_tag :password, "", :class => "input-text"
+
+    = #check_box_tag :remember_me, 1, params[:remember_me]
+    = #label_tag :remember_me
+
+
+  .form-actions
+    = submit_tag "Login", :class => 'btn btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), posts_path, :class => 'btn'
